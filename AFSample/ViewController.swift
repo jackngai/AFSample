@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import Alamofire
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        Alamofire.request("https://codewithchris.com/code/afsample.json").responseJSON { (response) in
+            
+            // Check if the result has a value
+            
+            if let JSON = response.result.value as? [String:Any]{
+                print(JSON["firstkey"] as! String)
+                print(JSON["secondkey"] as! NSArray)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
